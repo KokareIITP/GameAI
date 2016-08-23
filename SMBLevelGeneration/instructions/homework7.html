@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Homework 7</title>
+</head>
+
+<body>
+<h1>Homework7: Mario Level Generation</h1>
+<p>Procedural Content Generation is the use of algorithm (procedures) to create novel, and sometimes customized, game content from scratch. Examples of PCG include generation of levels, maps, tree, cityscapes, weapons, monsters, and quests. PCG is often used as a design-time tool to roughly sketch out level content to be refined by human designers. PCG can also be done at run-time to incorporate individual player differences such as skills or preferences. In this project, we look at run-time PCG to create Mario Bros. game levels customized to individual players’ play styles. This includes (a) learning a model of the player’s play style, and (b) using the model to create a custom level. Fortunately, the first part is already done for you. You must focus on designing and implementing algorithms that use the player information to create something that will evaluate well.</p>
+<p>This project will be using the <a href="http://www.marioai.org/LevelGeneration">2011 IEEE Super Mario Bros. Competition infrastructure (Level Generation Track)</a>. The description of the competition and some documentation can be found there.</p>
+<img src="mariolevel.png" />
+<p>You will write a procedural content generator in the provided Mario Bros. game engine that optimizes level content for different types of players such as those who like to jump, like to collect coins, or like to kill enemies. You will implement a Genetic Algorithm algorithms to tune the layout of the Mario Bros. level.</p>
+<hr />
+<h2>What you need to know</h2>
+<p>The Mario Bros. engine is written in Java. You will find the source code in the src/ directory.</p>
+<p>You will modify MyLevel.java and MyLevelGenerator.java to implement a Genetic Algorithm in order to satisfy a variety of &quot;player profiles&quot;. Each player profile is an evaluation function focused on a specific type of potential player. You are provided with three player profiles: </p>
+<ul>
+  <li>Scrooge: loves coins</li>
+  <li>Jumper: loves jumping</li>
+  <li>Killer: loves having to kill enemies </li>
+</ul>
+<p>Each evaluation function for each player profile returns a value between 0-1 (inclusive) to demonstrate how much that player profile &quot;likes&quot; a given level. You can see an example of this in MyLevelGenerator.java.</p>
+<p><strong>dk.itu.mario.level.MyLevel:</strong></p>
+<p>The default version of this class defines what a &quot;random starting point&quot; looks like for your search-based PCG technique. To start it is set up to simply create a long flat piece of ground, but you are encouraged to make alterations to this (and for your Genetic Algorithm you will have to). You are not allowed to change the length of the level or change the position of the end &quot;gate&quot;.</p>
+<ul>
+  <li>setBlock(x,y,byte-block-value): Sets the value of the current x,y value with a constant value determining the block type. You can see a list of all of these values in Level.java and see examples of this function being called in MyLevelGenerator.java</li>
+  <li>setSpriteTemplate(x,y,SpriteTemplate): Sets an enemy of the passed in SpriteTemplate class to the x,y position. You can see a list of all enemy types in Enemy.java and see an example of this function being called in MyLevelGenerator.java</li>
+  <li>clone(): This function creates a clone of the current level and can be used to generate &quot;neighbors&quot; for a search algorithm.</li>
+</ul>
+<p><strong>dk.itu.mario.level.generator.MyLevelGenerator:</strong></p>
+<p>This class should house the majority of the code for your Genetic Algorithm. We've set it up to demonstrate how to make changes to a single level, how to clone a level, and how to evaluate a level. </p>
+<p>You may change MyLevelGenerator as necessary.</p>
+<hr />
+<h2>Instructions</h2>
+<p>You must implement a Genetic Algorithm  that produces level conent that is &quot;liked&quot; by different player profiles as given by the three evaluation functions, Scrooge, Killer, and Jumper.</p>
+<p><strong>Step 1: </strong>Acquire and install apache ant (<a href="http://ant.apache.org/">http://ant.apache.org/</a>).</p>
+<p><strong>Step 2: </strong>In the homework7 directory, build the game engine:</p>
+<ul>
+  <strong>&gt; ant</strong>
+</ul>
+<p><strong>Step 3: </strong>Modify the following files: homework7/src/dk/itu/mario/level/MyLevel.java and homework7/src/dk/itu/mario/level/generator/MyLevelGenerator.java.</p>
+<p><strong>Step 4: </strong>Run your level generator from the homework7 directory: </p>
+<p>To run the codebase you must first compile any changes you've made with the command &quot;ant&quot; in the parent directory. Then if the code compiled correctly you can run the game by calling: </p>
+<ul>
+  <p><strong>&gt; java -cp bin dk.itu.mario.engine.PlayCustomized &lt;Player Profile Name&gt;</strong></p>
+</ul>
+<p>With the three player profiles you have access to: <br />
+</p>
+<ul>
+  <strong> &gt; java -cp bin dk.itu.mario.engine.PlayCustomized Scrooge<br />
+  &gt; java -cp bin dk.itu.mario.engine.PlayCustomized Jumper<br />
+  &gt; java -cp bin dk.itu.mario.engine.PlayCustomized Killer </strong>
+</ul>
+<p>When you run the application an image will be generated which shows the entire generated level as output_image.png in the parent directory. It will also drop a java GUI window which allows you to play through the level using the arrow keys, a to run, and space to jump. </p>
+<hr />
+<h2>Grading</h2>
+<ul>
+  <li>6 points: your code generates levels that score &gt;0.8 for the 3 test player profiles and 3 additional &quot;hybrid&quot; player profiles (1 point per player profile, with the average score from 5 levels)<br />
+    </li>
+  <li>3 points: all of the generated levels should be playable (0.1 point for each generated playable level). Playability will be evaluated by an A* agent that can play a perfect game.<br />
+    </li>
+  <li>1 point: create levels that do not violate any Mario conventions. Power blocks should all be accessible, no &quot;floating&quot; blocks or enemies, and no broken pipes.</li>
+</ul>
+<hr />
+<h2>Submission</h2>
+<p>To submit your solution, upload your modified MyLevel.java and MyLevelGenerator.java. </p>
+<p>DO NOT upload the entire game engine.</p>
+</body>
+
+</html>
